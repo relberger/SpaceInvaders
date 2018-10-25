@@ -14,7 +14,7 @@ class GameBoard {
     Graphics2D g;
 
     GameBoard() {
-        this.shoot = new Shooter();
+        this.shoot = new Shooter(true);
         this.proj = new Projectile();
         alienList = new ArrayList<>();
         generateAliens();
@@ -59,7 +59,7 @@ class GameBoard {
 
 
     private boolean checkBounds() {
-        Square sq = shoot.getLoc();
+        Square sq = shoot.getLocation();
         boolean tooFarLeft = sq.getX() < 0;
         boolean tooFarRight = sq.getX() >= BOARD_COLUMNS;
 

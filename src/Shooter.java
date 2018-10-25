@@ -1,16 +1,32 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Shooter
 {
 	private boolean exists;
 	private Image shooterIcon;
 	private Projectile projectile;
-	private int location; //location can be an x coordinate...?
+	private Square location;
 
-	public Shooter(boolean exists, int location)
+	public Shooter(boolean exists)
 	{
 		this.exists = exists;
-		this.location = location;
+
+		createIcon();
+	}
+
+	private void createIcon()
+	{
+		File icon = new File("shooter.jpg");
+		try
+		{
+			shooterIcon = ImageIO.read(icon);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isExists()
@@ -43,12 +59,12 @@ public class Shooter
 		this.projectile = projectile;
 	}
 
-	public int getLocation()
+	public Square getLocation()
 	{
 		return location;
 	}
 
-	public void setLocation(int location)
+	public void setLocation(Square location)
 	{
 		this.location = location;
 	}
