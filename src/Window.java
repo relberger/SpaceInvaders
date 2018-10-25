@@ -63,7 +63,12 @@ public class Window extends JFrame {
         protected void paintComponent(Graphics graphics) {
             super.paintComponent(graphics);
 
-            setBackground(new Color(53, 53, 53));
+            setBackground(new Color(0,0,0));
+
+            Alien alien = new Alien(0,0, SQUARE_SIZE, SQUARE_SIZE);
+            if (alien.isAlive() == true){
+                graphics.drawImage(alien.getAlienPic(), alien.getRow(), alien.getColumn(), this);
+            }
             gameBoard.paint(graphics);
         }
 
@@ -86,6 +91,7 @@ public class Window extends JFrame {
                     elapsedTime--;
 
                 }
+
 
                 sleep();
                 repaint();

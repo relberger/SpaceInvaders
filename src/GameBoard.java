@@ -2,6 +2,7 @@ import java.awt.*;
 
 public class GameBoard {
     public String getScore() {
+        return null;
     }
 
     public void update() {
