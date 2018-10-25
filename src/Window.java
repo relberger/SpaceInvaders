@@ -7,8 +7,7 @@ import java.awt.event.KeyEvent;
 public class Window extends JFrame {
 
     private Engine engine;
-    private static final int BOARD_COLUMNS = 15;
-    private static final int BOARD_ROWS = 12;
+
     private static final int SQUARE_SIZE = 40;
 
     private Window() {
@@ -22,8 +21,8 @@ public class Window extends JFrame {
         GameBoard gameBoard = new GameBoard();
         Engine engine = new Engine(gameBoard);
 
-        int canvasWidth = SQUARE_SIZE * BOARD_COLUMNS;
-        int canvasHeight = SQUARE_SIZE * BOARD_ROWS;
+        int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_COLUMNS;
+        int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_ROWS;
         engine.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
 
         addKeyListener(new MyKeyAdapter());
@@ -113,9 +112,9 @@ public class Window extends JFrame {
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-                engine.gameBoard.directionLeft();
+                engine.gameBoard.moveShooterLeft();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-                engine.gameBoard.directionRight();
+                engine.gameBoard.moveShooterRight();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
             }
