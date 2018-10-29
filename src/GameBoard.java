@@ -1,5 +1,7 @@
+
 import java.awt.*;
 import java.util.*;
+<<<<<<< HEAD
 
 
 class GameBoard {
@@ -51,6 +53,60 @@ class GameBoard {
         }
     }
 
+=======
+
+
+class GameBoard {
+
+    private Shooter shoot;
+    private Projectile proj;
+    private int score = 0;
+    private ArrayList<Square> alienList;
+    public final int BOARD_COLUMNS = 15;
+    public final int BOARD_ROWS = 12;
+    private Direction movement;
+    Graphics2D g;
+    private final int SIZE = 40;
+
+    GameBoard() {
+        this.shoot = new Shooter();
+        this.proj = new Projectile();
+        alienList = new ArrayList<>();
+        generateAliens();
+        update();
+    }
+
+    void update() {
+        moveShooter();
+    }
+
+
+    private void generateAliens() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < BOARD_COLUMNS; j++) {
+                Square square = new Square(Square.Entity.Alien, i, j);
+                alienList.add(square);
+            }
+        }
+
+    }
+
+    private void moveShooter() {
+
+        if (movement == Direction.LEFT) {
+            moveShooterLeft();
+        } else if (movement == Direction.RIGHT) {
+            moveShooterRight();
+        }
+    }
+
+    void moveShooterLeft() {
+        if (!checkBounds()) {
+            movement = Direction.LEFT;
+        }
+    }
+
+>>>>>>> ae122d9c08e34487ecebe0db4735510363e6ae1b
     void moveShooterRight() {
         if (!checkBounds()) {
             movement = Direction.RIGHT;
@@ -102,6 +158,14 @@ class GameBoard {
     }
 
     private void paintAliens(Graphics2D g) {
+<<<<<<< HEAD
+=======
+        Alien alien = new Alien(0,0, SIZE, SIZE);
+        if (alien.isAlive() == true){
+            g.drawImage(alien.getAlienPic(), alien.getRow() * SIZE, alien.getColumn() * SIZE, this);
+        }
+
+>>>>>>> ae122d9c08e34487ecebe0db4735510363e6ae1b
 
     }
 

@@ -62,7 +62,8 @@ public class Window extends JFrame {
         protected void paintComponent(Graphics graphics) {
             super.paintComponent(graphics);
 
-            setBackground(new Color(53, 53, 53));
+            setBackground(new Color(0,0,0));
+
             gameBoard.paint(graphics);
         }
 
