@@ -10,10 +10,11 @@ public class Shooter
 	private Projectile projectile;
 	private Square location;
 
-	public Shooter(boolean exists)
+	public Shooter(int x, int y, boolean exists)
 	{
 		this.exists = exists;
-
+		this.location = new Square(x,y);
+		location.setEntity(Square.Entity.Shooter);
 		createIcon();
 	}
 
@@ -28,6 +29,7 @@ public class Shooter
 			e.printStackTrace();
 		}
 	}
+
 
 	public boolean isExists()
 	{
@@ -68,4 +70,5 @@ public class Shooter
 	{
 		this.location = location;
 	}
+
 }
