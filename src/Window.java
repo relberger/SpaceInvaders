@@ -18,7 +18,7 @@ public class Window extends JFrame {
     private Engine createEngine() {
 
         Container cp = getContentPane();
-        GameBoard gameBoard = new GameBoard();
+        GameBoard gameBoard = new GameBoard(SQUARE_SIZE);
         Engine engine = new Engine(gameBoard);
 
         int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_COLUMNS;
@@ -82,7 +82,7 @@ public class Window extends JFrame {
 
                 if (elapsedTime >= 1) {
                     gameBoard.update();
-                    setTitle("Snake - Score: " + gameBoard.getScore());
+                    setTitle("Space Invaders - Score: " + gameBoard.getScore());
                     elapsedTime--;
 
                 }
