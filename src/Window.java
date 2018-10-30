@@ -82,7 +82,7 @@ public class Window extends JFrame {
 
                 if (elapsedTime >= 1) {
                     gameBoard.update();
-                    setTitle("Snake - Score: " + gameBoard.getScore());
+                    setTitle("Space Invaders - Score: " + gameBoard.getScore());
                     elapsedTime--;
 
                 }
