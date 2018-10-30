@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-public class Shooter {
-<<<<<<< HEAD
-=======
-    public Square getLoc() {
-        return null;
-    }
->>>>>>> ae122d9c08e34487ecebe0db4735510363e6ae1b
-}
-=======
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -20,10 +10,11 @@ public class Shooter
 	private Projectile projectile;
 	private Square location;
 
-	public Shooter(boolean exists)
+	public Shooter(int x, int y, boolean exists)
 	{
 		this.exists = exists;
-
+		this.location = new Square(x,y);
+		location.setEntity(Square.Entity.Shooter);
 		createIcon();
 	}
 
@@ -38,6 +29,7 @@ public class Shooter
 			e.printStackTrace();
 		}
 	}
+
 
 	public boolean isExists()
 	{
@@ -78,5 +70,5 @@ public class Shooter
 	{
 		this.location = location;
 	}
+
 }
->>>>>>> ca24d43b1e852420212908a83be22a4bda328f92

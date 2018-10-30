@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-public class Alien {
-=======
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.IOException;
 
@@ -66,8 +61,11 @@ public class Alien{
         return alive;
     }
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     public Image getAlienPic() {
         return alienPic;
     }
->>>>>>> ae122d9c08e34487ecebe0db4735510363e6ae1b
 }
