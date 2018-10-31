@@ -3,7 +3,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Shooter
+class Shooter
 {
 	private boolean exists;
 	private Image shooterIcon;
@@ -56,10 +56,6 @@ public class Shooter
 		return projectile;
 	}
 
-	public void setProjectile(Projectile projectile)
-	{
-		this.projectile = projectile;
-	}
 
 	public Square getLocation()
 	{

@@ -2,11 +2,11 @@ import java.awt.*;
 import java.util.*;
 import java.awt.image.ImageObserver;
 
-class GameBoard {
+public class GameBoard {
 
     private int cellSize;
     private Shooter shooter;
-    private Projectile projectile;
+    public Projectile projectile;
     private int score = 0;
     private ArrayList<Square> gameBoard;
     private ArrayList<Alien> aliens;
@@ -20,6 +20,7 @@ class GameBoard {
     GameBoard(int cellSize) {
         this.cellSize = cellSize;
         this.shooter = new Shooter(BOARD_ROWS - 1, (BOARD_COLUMNS - 1) / 2, true);
+
         this.projectile = new Projectile(90, 150);
         gameBoard = new ArrayList<>();
         aliens = new ArrayList<>();
@@ -50,34 +51,27 @@ class GameBoard {
         moveShooter();
     }
 
-    private void moveShooter() {
+    public void moveShooter() {
 
-        if (movement == Direction.LEFT) {
-            moveShooterLeft();
-        } else if (movement == Direction.RIGHT) {
-            moveShooterRight();
-        }
-    }
-
-    void moveShooterLeft() {
-        if (!checkBounds()) {
-            movement = Direction.LEFT;
-        }
-    }
-
-    void moveShooterRight() {
-        if (!checkBounds()) {
-            movement = Direction.RIGHT;
+        Square current = shooter.getLocation();
+        Square newLoc;
+        boolean[] bounds = checkBounds();
+        if (movement == Direction.LEFT && !bounds[1]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX() + 1, current.getY());
+            shooter.setLocation(newLoc);
+        } else if (movement == Direction.RIGHT && !bounds[0]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX() - 1, current.getY());
+            shooter.setLocation(newLoc);
         }
     }
 
 
-    private boolean checkBounds() {
+    private boolean[] checkBounds() {
         Square sq = shooter.getLocation();
         boolean tooFarLeft = sq.getX() < 0;
         boolean tooFarRight = sq.getX() >= BOARD_COLUMNS;
-
-        return tooFarLeft || tooFarRight;
+        boolean[] bounds = {tooFarLeft, tooFarRight};
+        return bounds;
     }
 
 
@@ -90,17 +84,20 @@ class GameBoard {
         return score;
     }
 
-    private boolean removeAlienIfShot() {
+
+    private void removeAlienIfShot() {
         for (int i = 0; i < gameBoard.size(); i++) {
             Square alien = gameBoard.get(i);
             if (projectile.getLocation().equals(alien)) {
                 alien.setEntity(Square.Entity.Empty);
                 Alien deadAlien = aliens.get(i);
                 deadAlien.setAlive(false);
-                return true;
+                score+=10;
+                break;
+
             }
         }
-        return false;
+
     }
 
 
@@ -143,10 +140,11 @@ class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-
+            
     }
 
     public void shoot() {
+        projectile = new Projectile(shooter.getLocation().getX());
         paintShot(g);
         removeAlienIfShot();
     }
