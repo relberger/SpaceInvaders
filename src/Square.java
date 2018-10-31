@@ -84,7 +84,7 @@ public class Square {
     /**
      * Represents what is on a particular square.
      */
-    enum Entity {
+    protected enum Entity {
         Empty,
         Shooter,
         Alien,

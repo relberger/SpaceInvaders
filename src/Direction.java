@@ -1,5 +1,5 @@
 
-public enum Direction {
+enum Direction {
     LEFT,
     RIGHT
 }

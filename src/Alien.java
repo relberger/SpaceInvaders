@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class Alien{
     //location
-    private int column = 0;
-    private int row = 0;
+    private int col;
+    private int row;
 
     //image
     private Image alienPic;
@@ -17,9 +17,9 @@ public class Alien{
     //dead/alive
     private boolean alive = true;
 
-    public Alien(int row, int column, int height, int width) {
+    public Alien(int row, int col, int height, int width) {
         this.row = row;
-        this.column = column;
+        this.col = col;
 
         this.height = height;
         this.width = width;
@@ -49,8 +49,8 @@ public class Alien{
         return resized;
     }
 
-    public int getColumn() {
-        return column;
+    public int getCol() {
+        return col;
     }
 
     public int getRow() {
