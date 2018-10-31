@@ -112,7 +112,7 @@ public class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-            
+
     }
 
     public void shoot() {
