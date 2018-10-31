@@ -9,10 +9,11 @@ public class Projectile {
         this.col = col;
     }
 
-
     public Projectile(int col) {
         this.col = col;
     }
 
-
+	public Object getLocation() {
+		return null;
+	}
 }

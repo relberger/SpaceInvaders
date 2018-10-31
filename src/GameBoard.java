@@ -8,34 +8,47 @@ public class GameBoard {
     private Shooter shooter;
     public Projectile projectile;
     private int score = 0;
-    private ArrayList<Square> alienList;
-    public ImageObserver imgObs;
+    private ArrayList<Square> gameBoard;
+    private ArrayList<Alien> aliens;
+    private ImageObserver imgObs;
     public final int BOARD_COLUMNS = 15;
     public final int BOARD_ROWS = 12;
-    public Direction movement;
+    private Direction movement;
+    private boolean gameOver;
     Graphics2D g;
 
     GameBoard(int cellSize) {
         this.cellSize = cellSize;
         this.shooter = new Shooter(BOARD_ROWS - 1, (BOARD_COLUMNS - 1) / 2, true);
-        alienList = new ArrayList<>();
+
+        this.projectile = new Projectile(90, 150);
+        gameBoard = new ArrayList<>();
+        aliens = new ArrayList<>();
+        generateGameBoard();
         generateAliens();
         update();
     }
 
-    void update() {
-        moveShooter();
-    }
-
-
-    private void generateAliens() {
-        for (int i = 0; i < 5; i++) {
+    private void generateGameBoard() {
+        for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLUMNS; j++) {
-                Square square = new Square(Square.Entity.Alien, i, j);
-                alienList.add(square);
+                Square square = new Square(i, j);
+                gameBoard.add(square);
             }
         }
+    }
 
+    private void generateAliens() {
+        for (int i = 0; i < (5 * BOARD_COLUMNS); i++) {
+            Square square = gameBoard.get(i);
+            square.setEntity(Square.Entity.Alien);
+            Alien alien = new Alien(square.getX(), square.getY(), cellSize, cellSize);
+            aliens.add(alien);
+        }
+    }
+
+    void update() {
+        moveShooter();
     }
 
     public void moveShooter() {
@@ -71,13 +84,17 @@ public class GameBoard {
         return score;
     }
 
+
     private void removeAlienIfShot() {
-       for (int i = 0; i < alienList.size(); i++) {
-            Square alien = alienList.get(i);
-            if (projectile.getCol() == alien.getX()) {
-                alienList.remove(i);
+        for (int i = 0; i < gameBoard.size(); i++) {
+            Square alien = gameBoard.get(i);
+            if (projectile.getLocation().equals(alien)) {
+                alien.setEntity(Square.Entity.Empty);
+                Alien deadAlien = aliens.get(i);
+                deadAlien.setAlive(false);
                 score+=10;
                 break;
+
             }
         }
 
@@ -95,18 +112,29 @@ public class GameBoard {
 
     private void paintShooter(Graphics2D g) {
         int row = shooter.getLocation().getY();
-        int column = shooter.getLocation().getX();
-        g.drawImage(shooter.getShooterIcon(), row * cellSize, column * cellSize, imgObs);
+        int col = shooter.getLocation().getX();
+        gameBoard.get(getSquareIndex(row, col));
+        g.drawImage(shooter.getShooterIcon(), row * cellSize, col * cellSize, imgObs);
 
+    }
+
+    private int getSquareIndex(int row, int col) {
+        for (int i = 0; i < gameBoard.size(); i++) {
+            if (gameBoard.get(i).getY() == row) {
+                if (gameBoard.get(i).getX() == col) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     private void paintAliens(Graphics2D g) {
 
-        for (int i = 0; i < alienList.size(); i++) {
-            Square alienCell = alienList.get(i);
-            Alien alien = new Alien(alienCell.getY(), alienCell.getX(), cellSize, cellSize);
-            if (alien.isAlive() == true) {
-                g.drawImage(alien.getAlienPic(), alien.getRow() * cellSize, alien.getColumn() * cellSize, imgObs);
+        for (int i = 0; i < aliens.size(); i++) {
+            Alien alien = aliens.get(i);
+            if (alien.isAlive()) {
+                g.drawImage(alien.getAlienPic(), alien.getCol() * cellSize, alien.getRow() * cellSize, imgObs);
             }
         }
     }
@@ -119,5 +147,9 @@ public class GameBoard {
         projectile = new Projectile(shooter.getLocation().getX());
         paintShot(g);
         removeAlienIfShot();
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
