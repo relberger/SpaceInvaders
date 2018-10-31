@@ -13,7 +13,7 @@ public class GameBoard {
     private ImageObserver imgObs;
     public final int BOARD_COLUMNS = 15;
     public final int BOARD_ROWS = 12;
-    private Direction movement;
+    public Direction movement;
     private boolean gameOver;
     Graphics2D g;
 
@@ -21,12 +21,10 @@ public class GameBoard {
         this.cellSize = cellSize;
         this.shooter = new Shooter(BOARD_ROWS - 1, (BOARD_COLUMNS - 1) / 2, true);
 
-        this.projectile = new Projectile(90, 150);
         gameBoard = new ArrayList<>();
         aliens = new ArrayList<>();
         generateGameBoard();
         generateAliens();
-        update();
     }
 
     private void generateGameBoard() {
@@ -47,20 +45,17 @@ public class GameBoard {
         }
     }
 
-    void update() {
-        moveShooter();
-    }
 
     public void moveShooter() {
 
         Square current = shooter.getLocation();
         Square newLoc;
         boolean[] bounds = checkBounds();
-        if (movement == Direction.LEFT && !bounds[1]) {
-            newLoc = new Square(Square.Entity.Shooter, current.getX() + 1, current.getY());
+        if (movement == Direction.LEFT && !bounds[0]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() - 1);
             shooter.setLocation(newLoc);
-        } else if (movement == Direction.RIGHT && !bounds[0]) {
-            newLoc = new Square(Square.Entity.Shooter, current.getX() - 1, current.getY());
+        } else if (movement == Direction.RIGHT && !bounds[1]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() + 1);
             shooter.setLocation(newLoc);
         }
     }
@@ -68,8 +63,8 @@ public class GameBoard {
 
     private boolean[] checkBounds() {
         Square sq = shooter.getLocation();
-        boolean tooFarLeft = sq.getX() < 0;
-        boolean tooFarRight = sq.getX() >= BOARD_COLUMNS;
+        boolean tooFarLeft = sq.getY() == 0;
+        boolean tooFarRight = sq.getY() == BOARD_COLUMNS - 1;
         boolean[] bounds = {tooFarLeft, tooFarRight};
         return bounds;
     }
@@ -92,7 +87,7 @@ public class GameBoard {
                 alien.setEntity(Square.Entity.Empty);
                 Alien deadAlien = aliens.get(i);
                 deadAlien.setAlive(false);
-                score+=10;
+                score += 10;
                 break;
 
             }
@@ -111,10 +106,10 @@ public class GameBoard {
     }
 
     private void paintShooter(Graphics2D g) {
-        int row = shooter.getLocation().getY();
-        int col = shooter.getLocation().getX();
-        gameBoard.get(getSquareIndex(row, col));
-        g.drawImage(shooter.getShooterIcon(), row * cellSize, col * cellSize, imgObs);
+        int col = shooter.getLocation().getY();
+        int row = shooter.getLocation().getX();
+        gameBoard.get(getSquareIndex(col, row));
+        g.drawImage(shooter.getShooterIcon(), col * cellSize, row * cellSize, imgObs);
 
     }
 
@@ -140,7 +135,7 @@ public class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-            
+
     }
 
     public void shoot() {

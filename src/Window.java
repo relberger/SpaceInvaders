@@ -81,12 +81,9 @@ public class Window extends JFrame {
                 lastTime = System.nanoTime();
 
                 if (elapsedTime >= 1) {
-                    gameBoard.update();
                     setTitle("Space Invaders - Score: " + gameBoard.getScore());
                     elapsedTime--;
-
                 }
-
                 sleep();
                 repaint();
             }
