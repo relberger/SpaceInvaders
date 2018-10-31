@@ -18,7 +18,7 @@ public class Projectile {
 	}
 
 
-	public Object getLoc() {
+	public Object getLocation() {
 		return null;
 	}
 }
