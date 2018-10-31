@@ -49,7 +49,7 @@ public class Window extends JFrame {
     /**
      * Contains the game loop.
      */
-    private class Engine extends JPanel implements Runnable {
+    protected class Engine extends JPanel implements Runnable {
 
         private GameBoard gameBoard;
         private boolean running = false;
@@ -62,7 +62,7 @@ public class Window extends JFrame {
         protected void paintComponent(Graphics graphics) {
             super.paintComponent(graphics);
 
-            setBackground(new Color(0,0,0));
+            setBackground(new Color(0, 0, 0));
 
             gameBoard.paint(graphics);
         }
@@ -113,9 +113,11 @@ public class Window extends JFrame {
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-                engine.gameBoard.moveShooterLeft();
+                engine.gameBoard.movement = Direction.LEFT;
+                engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-                engine.gameBoard.moveShooterRight();
+                engine.gameBoard.movement = Direction.RIGHT;
+                engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
             }
