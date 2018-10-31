@@ -25,7 +25,6 @@ public class GameBoard {
         aliens = new ArrayList<>();
         generateGameBoard();
         generateAliens();
-        update();
     }
 
     private void generateGameBoard() {
@@ -46,20 +45,17 @@ public class GameBoard {
         }
     }
 
-    void update() {
-        moveShooter();
-    }
 
     public void moveShooter() {
 
         Square current = shooter.getLocation();
         Square newLoc;
         boolean[] bounds = checkBounds();
-        if (movement == Direction.LEFT && !bounds[1]) {
-            newLoc = new Square(Square.Entity.Shooter, current.getX() + 1, current.getY());
+        if (movement == Direction.LEFT && !bounds[0]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() - 1);
             shooter.setLocation(newLoc);
-        } else if (movement == Direction.RIGHT && !bounds[0]) {
-            newLoc = new Square(Square.Entity.Shooter, current.getX() - 1, current.getY());
+        } else if (movement == Direction.RIGHT && !bounds[1]) {
+            newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() + 1);
             shooter.setLocation(newLoc);
         }
     }
@@ -67,8 +63,8 @@ public class GameBoard {
 
     private boolean[] checkBounds() {
         Square sq = shooter.getLocation();
-        boolean tooFarLeft = sq.getX() < 0;
-        boolean tooFarRight = sq.getX() >= BOARD_COLUMNS;
+        boolean tooFarLeft = sq.getY() == 0;
+        boolean tooFarRight = sq.getY() == BOARD_COLUMNS - 1;
         boolean[] bounds = {tooFarLeft, tooFarRight};
         return bounds;
     }
@@ -110,10 +106,10 @@ public class GameBoard {
     }
 
     private void paintShooter(Graphics2D g) {
-        int row = shooter.getLocation().getY();
-        int col = shooter.getLocation().getX();
-        gameBoard.get(getSquareIndex(row, col));
-        g.drawImage(shooter.getShooterIcon(), row * cellSize, col * cellSize, imgObs);
+        int col = shooter.getLocation().getY();
+        int row = shooter.getLocation().getX();
+        gameBoard.get(getSquareIndex(col, row));
+        g.drawImage(shooter.getShooterIcon(), col * cellSize, row * cellSize, imgObs);
 
     }
 
