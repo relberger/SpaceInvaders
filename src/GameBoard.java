@@ -13,7 +13,7 @@ public class GameBoard {
     private ImageObserver imgObs;
     public final int BOARD_COLUMNS = 15;
     public final int BOARD_ROWS = 12;
-    private Direction movement;
+    public Direction movement;
     private boolean gameOver;
     Graphics2D g;
 
@@ -21,7 +21,6 @@ public class GameBoard {
         this.cellSize = cellSize;
         this.shooter = new Shooter(BOARD_ROWS - 1, (BOARD_COLUMNS - 1) / 2, true);
 
-        this.projectile = new Projectile(90, 150);
         gameBoard = new ArrayList<>();
         aliens = new ArrayList<>();
         generateGameBoard();
@@ -92,7 +91,7 @@ public class GameBoard {
                 alien.setEntity(Square.Entity.Empty);
                 Alien deadAlien = aliens.get(i);
                 deadAlien.setAlive(false);
-                score+=10;
+                score += 10;
                 break;
 
             }
