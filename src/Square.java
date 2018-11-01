@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Represents a square on the board. Each Square has an Entity. An Entity
  * is what is on the Square: either there is the shooter, an alien, the projectile,
