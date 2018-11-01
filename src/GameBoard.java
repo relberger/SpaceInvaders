@@ -2,10 +2,10 @@ import java.awt.*;
 import java.util.*;
 import java.awt.image.ImageObserver;
 
-public class GameBoard {
-    private int cellSize;
-    private Shooter shooter;
-    public Projectile projectile;
+class GameBoard {
+    protected int cellSize;
+    protected Shooter shooter;
+    private Projectile projectile;
     private int score = 0;
     private ArrayList<Square> gameBoard;
     private ArrayList<Alien> aliens;
@@ -13,7 +13,7 @@ public class GameBoard {
     public final int BOARD_SIZE = 15;
     public Direction movement;
     Graphics2D g;
-    private boolean shooting;
+    public boolean shooting;
 
     GameBoard(int cellSize) {
         this.cellSize = cellSize;
@@ -156,9 +156,9 @@ public class GameBoard {
             projectile = new Projectile(current);
             shooting = true;
             if (removeAlienIfShot()) {
+
                 if (isGameOver()) {
-                    System.out.println("Your final score is: " + score);
-                    System.exit(0);
+                    exit();
                 }
                 break;
             }
@@ -173,7 +173,7 @@ public class GameBoard {
 
     private void sleep() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
