@@ -201,7 +201,6 @@ public class GameBoard
 	{
 		projectile = new Projectile(shooter.getLocation().getX());
 		paintShot(g);
-		//removeAlienIfShot();
 	}
 
 	public boolean isGameOver()
