@@ -159,17 +159,20 @@ public class GameBoard
 
 	private void paintShot(Graphics2D g)
 	{
-		for (int row = shooter.getLocation().getY(); row < 12; row++)
+		for (int column = shooter.getLocation().getX(); column >= 0; column--)
 		{
-			int column = shooter.getLocation().getX();
+			int row = shooter.getLocation().getY();
+			Square square = gameBoard.get(getSquareIndex(row, column));
 
-			if (gameBoard.get(getSquareIndex(row, column)).getEntity() != Square.Entity.valueOf("Alien"))
+			if (square.getEntity() != Square.Entity.valueOf("Alien"))
 			{
 				Thread shootThread = new Thread();
 				shootThread.start();
 
+				square.setEntity(Square.Entity.Projectile);
+
 				g.setColor(Color.white);
-				g.fillOval(column * cellSize, row * cellSize, 50, 50);
+				g.fillOval(square.getX(), square.getY(), 50, 50);
 				System.out.println("shoot");
 
 				try
@@ -182,7 +185,10 @@ public class GameBoard
 			}
 			else
 			{
-				gameBoard.get(getSquareIndex(row, column)).setEntity(Square.Entity.Empty);
+				square.setEntity(Square.Entity.Empty);
+				//need to somehow remove/overwrite alien image 
+				//g.setColor(Color.black);
+				//g.drawRect(square.getX(), square.getY(), square.getX() * cellSize, square.getY() * cellSize);
 				return;
 			}
 		}
