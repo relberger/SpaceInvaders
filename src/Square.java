@@ -1,4 +1,4 @@
-
+package src;
 
 /**
  * Represents a square on the board. Each Square has an Entity. An Entity
