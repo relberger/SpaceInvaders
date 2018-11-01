@@ -147,7 +147,7 @@ public class GameBoard {
 
 	private void paintShot(Graphics2D g) {
 		g.setColor(Color.GREEN);
-		g.fillRect(projectile.getLocation().getX(), projectile.getLocation().getY(), cellSize / 5, cellSize);
+		g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
 		sleep();
 
 	}
