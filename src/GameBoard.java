@@ -144,7 +144,7 @@ public class GameBoard {
 
     private void paintShot(Graphics2D g) {
         g.setColor(Color.GREEN);
-        g.fillRect(projectile.getLocation().getX(), projectile.getLocation().getY(), cellSize / 5, cellSize);
+        g.fillRect(projectile.getLocation().getY(), projectile.getLocation().getX(), cellSize / 5, cellSize);
         sleep();
 
     }
@@ -172,7 +172,7 @@ public class GameBoard {
 
     private void sleep() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
