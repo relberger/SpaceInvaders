@@ -1,66 +1,53 @@
-package src;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-class Shooter
-{
-	private boolean exists;
-	private Image shooterIcon;
-	private Square location;
+class Shooter {
+    private boolean exists;
+    private Image shooterIcon;
+    private Square location;
 
-	public Shooter(int x, int y, boolean exists)
-	{
-		this.exists = exists;
-		this.location = new Square(x,y);
-		location.setEntity(Square.Entity.Shooter);
-		createIcon();
-	}
+    public Shooter(int x, int y, boolean exists) {
+        this.exists = exists;
+        this.location = new Square(x, y);
+        location.setEntity(Square.Entity.Shooter);
+        createIcon();
+    }
 
-	private void createIcon()
-	{
-		File icon = new File("shooter.jpg");
-		try
-		{
-			shooterIcon = ImageIO.read(icon);
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
+    private void createIcon() {
+        File icon = new File("shooter.jpg");
+        try {
+            shooterIcon = ImageIO.read(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
-	public boolean isExists()
-	{
-		return exists;
-	}
+    public boolean isExists() {
+        return exists;
+    }
 
-	public void setExists(boolean exists)
-	{
-		this.exists = exists;
-	}
+    public void setExists(boolean exists) {
+        this.exists = exists;
+    }
 
-	public Image getShooterIcon()
-	{
-		return shooterIcon;
-	}
+    public Image getShooterIcon() {
+        return shooterIcon;
+    }
 
-	public void setShooterIcon(Image shooterIcon)
-	{
-		this.shooterIcon = shooterIcon;
-	}
+    public void setShooterIcon(Image shooterIcon) {
+        this.shooterIcon = shooterIcon;
+    }
 
 
-	public Square getLocation()
-	{
-		return location;
-	}
+    public Square getLocation() {
+        return location;
+    }
 
-	public void setLocation(Square location)
-	{
-		this.location = location;
-	}
+    public void setLocation(Square location) {
+        this.location = location;
+    }
 
 }

@@ -1,16 +1,15 @@
-package src;
 
 public class Projectile {
 
-	private Square location;
+    private Square location;
 
 
-	public Projectile(Square location) {
+    public Projectile(Square location) {
 
-		this.location = location;
-	}
+        this.location = location;
+    }
 
-	public Square getLocation() {
-		return location;
-	}
+    public Square getLocation() {
+        return location;
+    }
 }

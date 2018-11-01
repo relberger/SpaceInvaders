@@ -1,4 +1,4 @@
-package src;
+
 
 /**
  * Represents a square on the board. Each Square has an Entity. An Entity
@@ -14,20 +14,22 @@ public class Square {
 
     /**
      * Construct the Square with nothing on it.
-     * @param x         the x coordinate of the square
-     * @param y         the y coordinate of the square
+     *
+     * @param x the x coordinate of the square
+     * @param y the y coordinate of the square
      */
-    public Square (int x, int y) {
+    public Square(int x, int y) {
         this(Entity.Empty, x, y);
     }
 
     /**
      * Construct the Square with a specified entity.
-     * @param entity    the entity that is on the square
-     * @param x         the x coordinate of the square
-     * @param y         the y coordinate of the square
+     *
+     * @param entity the entity that is on the square
+     * @param x      the x coordinate of the square
+     * @param y      the y coordinate of the square
      */
-    Square (Entity entity, int x, int y) {
+    Square(Entity entity, int x, int y) {
         this.entity = entity;
         this.x = x;
         this.y = y;
@@ -35,26 +37,28 @@ public class Square {
 
     /**
      * Change what is on the Square.
-     * @param entity    the new entity
+     *
+     * @param entity the new entity
      */
-    void setEntity (Entity entity) {
+    void setEntity(Entity entity) {
 
         this.entity = entity;
     }
 
     /**
      * Get what is on the Square.
-     * @return          the entity on the Square
+     *
+     * @return the entity on the Square
      */
-    Entity getEntity () {
+    Entity getEntity() {
         return entity;
     }
 
-    int getX () {
+    int getX() {
         return x;
     }
 
-    int getY () {
+    int getY() {
 
         return y;
     }
@@ -68,7 +72,7 @@ public class Square {
     }
 
     @Override
-    public boolean equals (Object obj) {
+    public boolean equals(Object obj) {
 
         if (!(obj instanceof Square)) {
             return false;
@@ -79,7 +83,7 @@ public class Square {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return entity + " at (" + x + ", " + y + ")";
     }
 
