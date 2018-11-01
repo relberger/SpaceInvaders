@@ -146,8 +146,6 @@ class GameBoard {
     private void paintShot(Graphics2D g) {
         g.setColor(Color.GREEN);
         g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
-        sleep();
-
     }
 
     public void shoot() {
@@ -156,7 +154,7 @@ class GameBoard {
             projectile = new Projectile(current);
             shooting = true;
             if (removeAlienIfShot()) {
-
+                shooting = false;
                 if (isGameOver()) {
                     exit();
                 }
