@@ -13,8 +13,8 @@ public class GameBoard {
     private ImageObserver imgObs;
     public final int BOARD_SIZE = 15;
     public Direction movement;
-    public boolean proj;
     Graphics2D g;
+    private boolean shooting;
 
     GameBoard(int cellSize) {
         this.cellSize = cellSize;
@@ -108,7 +108,7 @@ public class GameBoard {
 
         paintShooter(g);
         paintAliens(g);
-        if (proj) {
+        if(shooting) {
             paintShot(g);
         }
 
@@ -143,8 +143,8 @@ public class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-        g.setColor(Color.CYAN);
-        g.fillRect(projectile.getLocation().getY(), projectile.getLocation().getX(), cellSize / 5, cellSize);
+        g.setColor(Color.GREEN);
+        g.fillRect(projectile.getLocation().getX(), projectile.getLocation().getY(), cellSize / 5, cellSize);
         sleep();
 
     }
@@ -153,8 +153,12 @@ public class GameBoard {
         for (int loc = BOARD_SIZE - 1; loc >= 0; loc--) {
             Square current = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), loc);
             projectile = new Projectile(current);
-            proj = true;
+            shooting = true;
             if (removeAlienIfShot()) {
+                if(isGameOver()){
+                    System.out.println("Your final score is: " + score);
+                    System.exit(0);
+                }
                 break;
             }
         }

@@ -22,7 +22,7 @@ public class Window extends JFrame {
         Engine engine = new Engine(gameBoard);
 
         int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_SIZE;
-        int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_ROWS;
+        int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_SIZE;
         engine.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
 
         addKeyListener(new MyKeyAdapter());
@@ -39,6 +39,7 @@ public class Window extends JFrame {
         pack();
         setVisible(true);
         setLocationRelativeTo(null);// Center window
+
     }
 
     private void startGame(Engine engine) {
@@ -85,9 +86,6 @@ public class Window extends JFrame {
                     elapsedTime--;
                 }
                 sleep();
-               if(gameBoard.isGameOver()){
-                   engine.running = false;
-               }
                 repaint();
             }
         }
@@ -120,7 +118,6 @@ public class Window extends JFrame {
                 engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
-                engine.gameBoard.proj = false;
             }
 
         }
