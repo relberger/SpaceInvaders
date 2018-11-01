@@ -1,6 +1,10 @@
 package src;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.awt.image.ImageObserver;
 
@@ -41,7 +45,7 @@ class GameBoard {
         for (int i = 0; i < (5 * BOARD_SIZE); i++) {
             Square square = gameBoard.get(i);
             square.setEntity(Square.Entity.Alien);
-            Alien alien = new Alien(square.getX(), square.getY(), cellSize, cellSize);
+            Alien alien = new Alien(square.getX(), square.getY());
             aliens.add(alien);
         }
     }
@@ -141,13 +145,33 @@ class GameBoard {
     }
 
     private void paintAliens(Graphics2D g) {
+        Image alienPic = createAlienPic();
 
         for (int i = 0; i < aliens.size(); i++) {
             Alien alien = aliens.get(i);
             if (alien.isAlive()) {
-                g.drawImage(alien.getAlienPic(), alien.getCol() * cellSize, alien.getRow() * cellSize, imgObs);
+                g.drawImage(alienPic, alien.getCol() * cellSize, alien.getRow() * cellSize, imgObs);
             }
         }
+    }
+
+    private Image createAlienPic() {
+        File imageFile = new File("alien.jpg");
+        try {
+            return resize(ImageIO.read(imageFile), cellSize, cellSize);
+        } catch (IOException e) {
+            System.out.println("Image not found.");
+        }
+        return null;
+    }
+
+    private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
     }
 
     private void paintShot(Graphics2D g) {
@@ -175,6 +199,7 @@ class GameBoard {
         }
 
     }
+
 
     public boolean isGameOver() {
 
