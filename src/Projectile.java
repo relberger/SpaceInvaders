@@ -1,19 +1,10 @@
+package src;
+
 public class Projectile {
-    private int col;
+    private int column;
 
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public Projectile(int col) {
-        this.col = col;
-    }
-
-	public Object getLocation() {
-		return null;
+	public Projectile(int column)
+	{
+		this.column = column;
 	}
 }

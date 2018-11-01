@@ -1,3 +1,7 @@
+package src;
+
+import src.GameBoard;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -117,6 +121,7 @@ public class Window extends JFrame {
                 engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
+                repaint();
             }
 
         }
