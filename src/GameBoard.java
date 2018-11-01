@@ -1,5 +1,3 @@
-package src;
-
 import java.awt.*;
 import java.util.*;
 import java.awt.image.ImageObserver;
@@ -60,6 +58,8 @@ class GameBoard {
             shooter.setLocation(newLoc);
         }
         shooter.getLocation().setEntity(Square.Entity.Shooter);
+        Square shot = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), shooter.getLocation().getX());
+        projectile = new Projectile(shot);
     }
 
 
@@ -83,11 +83,15 @@ class GameBoard {
 
 
     private boolean removeAlienIfShot() {
+
         boolean dead = false;
         for (int i = aliens.size() - 1; i >= 0; i--) {
             int squareLoc = getSquareIndex(aliens.get(i).getRow(), aliens.get(i).getCol());
+
             if (squareLoc != -1) {
+
                 Square alien = gameBoard.get(squareLoc);
+                shooting = true;
                 if (projectile.getLocation().equals(alien)) {
                     alien.setEntity(Square.Entity.Empty);
                     Alien deadAlien = aliens.get(i);
@@ -112,10 +116,8 @@ class GameBoard {
         paintShooter(g);
         paintAliens(g);
         if (shooting) {
-            System.out.println(projectile.getLocation());
             paintShot(g);
         }
-
     }
 
     private void paintShooter(Graphics2D g) {
@@ -148,11 +150,10 @@ class GameBoard {
 
     private void paintShot(Graphics2D g) {
         g.setColor(Color.GREEN);
-        g.drawLine((shooter.getLocation().getY()*cellSize) + cellSize/2,
-                (shooter.getLocation().getX()*cellSize)  + cellSize/2,
-                (projectile.getLocation().getX()*cellSize) + cellSize/2,
-                (projectile.getLocation().getY()*cellSize) + cellSize/2);
-        //g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
+        g.drawLine((shooter.getLocation().getY() * cellSize) + cellSize / 2,
+                (shooter.getLocation().getX() * cellSize) + cellSize / 2,
+                (projectile.getLocation().getX() * cellSize) + cellSize / 2,
+                (projectile.getLocation().getY() * cellSize) + cellSize / 2);
         sleep();
 
     }
@@ -161,7 +162,7 @@ class GameBoard {
         for (int loc = BOARD_SIZE - 1; loc >= 0; loc--) {
             Square current = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), loc);
             projectile = new Projectile(current);
-            shooting = true;
+
             if (removeAlienIfShot()) {
 
                 if (isGameOver()) {
