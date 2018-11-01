@@ -4,6 +4,3 @@ enum Direction {
     LEFT,
     RIGHT
 }
-
-
-

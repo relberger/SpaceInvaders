@@ -8,29 +8,29 @@ package src;
 public class Square {
 
     private Entity entity;
-    private int row;
-    private int col;
+    private int x;
+    private int y;
 
 
     /**
      * Construct the Square with nothing on it.
-     * @param row         the row coordinate of the square
-     * @param col         the col coordinate of the square
+     * @param x         the x coordinate of the square
+     * @param y         the y coordinate of the square
      */
-    public Square (int row, int col) {
-        this(Entity.Empty, row, col);
+    public Square (int x, int y) {
+        this(Entity.Empty, x, y);
     }
 
     /**
      * Construct the Square with a specified entity.
      * @param entity    the entity that is on the square
-     * @param row         the row coordinate of the square
-     * @param col         the col coordinate of the square
+     * @param x         the x coordinate of the square
+     * @param y         the y coordinate of the square
      */
-    Square (Entity entity, int row, int col) {
+    Square (Entity entity, int x, int y) {
         this.entity = entity;
-        this.row = row;
-        this.col = col;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -50,21 +50,21 @@ public class Square {
         return entity;
     }
 
-    int getRow() {
-        return row;
+    int getX () {
+        return x;
     }
 
-    int getCol() {
+    int getY () {
 
-        return col;
+        return y;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override
@@ -75,12 +75,12 @@ public class Square {
         }
 
         Square sq = (Square) obj;
-        return sq.row == row && sq.col == col;
+        return sq.x == x && sq.y == y;
     }
 
     @Override
     public String toString () {
-        return entity + " at (" + row + ", " + col + ")";
+        return entity + " at (" + x + ", " + y + ")";
     }
 
     /**

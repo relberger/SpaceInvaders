@@ -1,10 +1,16 @@
 package src;
 
 public class Projectile {
-    private int col;
 
-	public Projectile(int col)
-	{
-		this.col = col;
+	private Square location;
+
+
+	public Projectile(Square location) {
+
+		this.location = location;
+	}
+
+	public Square getLocation() {
+		return location;
 	}
 }

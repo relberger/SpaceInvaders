@@ -9,13 +9,12 @@ class Shooter
 {
 	private boolean exists;
 	private Image shooterIcon;
-	private Projectile projectile;
 	private Square location;
 
-	public Shooter(int row, int col, boolean exists)
+	public Shooter(int x, int y, boolean exists)
 	{
 		this.exists = exists;
-		this.location = new Square(row,col);
+		this.location = new Square(x,y);
 		location.setEntity(Square.Entity.Shooter);
 		createIcon();
 	}
@@ -51,11 +50,6 @@ class Shooter
 	public void setShooterIcon(Image shooterIcon)
 	{
 		this.shooterIcon = shooterIcon;
-	}
-
-	public Projectile getProjectile()
-	{
-		return projectile;
 	}
 
 
