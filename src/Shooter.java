@@ -12,10 +12,10 @@ class Shooter
 	private Projectile projectile;
 	private Square location;
 
-	public Shooter(int x, int y, boolean exists)
+	public Shooter(int row, int col, boolean exists)
 	{
 		this.exists = exists;
-		this.location = new Square(x,y);
+		this.location = new Square(row,col);
 		location.setEntity(Square.Entity.Shooter);
 		createIcon();
 	}

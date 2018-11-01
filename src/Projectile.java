@@ -1,10 +1,10 @@
 package src;
 
 public class Projectile {
-    private int column;
+    private int col;
 
-	public Projectile(int column)
+	public Projectile(int col)
 	{
-		this.column = column;
+		this.col = col;
 	}
 }
