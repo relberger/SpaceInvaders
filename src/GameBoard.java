@@ -84,16 +84,18 @@ public class GameBoard {
         boolean dead = false;
         for (int i = 0; i < aliens.size(); i++) {
             int squareLoc = getSquareIndex(aliens.get(i).getRow(), aliens.get(i).getCol());
-            Square alien = gameBoard.get(squareLoc);
-            if (projectile.getLocation().equals(alien)) {
-                alien.setEntity(Square.Entity.Empty);
-                Alien deadAlien = aliens.get(i);
-                aliens.remove(i);
-                deadAlien.setAlive(false);
-                dead = true;
-                score += 10;
-                break;
+            if(squareLoc != -1) {
+                Square alien = gameBoard.get(squareLoc);
+                if (projectile.getLocation().equals(alien)) {
+                    alien.setEntity(Square.Entity.Empty);
+                    Alien deadAlien = aliens.get(i);
+                    deadAlien.setAlive(false);
+                    aliens.remove(i);
+                    dead = true;
+                    score += 10;
+                    break;
 
+                }
             }
         }
         return dead;
