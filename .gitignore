@@ -1,10 +1,7 @@
 .idea/
-<<<<<<< HEAD
 out/
 SpaceInvaders.iml
-=======
 .idea/vcs.xml
 target/
->>>>>>> ca24d43b1e852420212908a83be22a4bda328f92
 vcs.xml
 workspace.xml
