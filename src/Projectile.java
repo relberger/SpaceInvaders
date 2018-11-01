@@ -13,4 +13,8 @@ public class Projectile {
     public Square getLocation() {
         return location;
     }
+
+    public void setLocation(Square location) {
+        this.location = location;
+    }
 }
