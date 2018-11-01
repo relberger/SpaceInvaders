@@ -161,14 +161,15 @@ public class GameBoard
 	{
 		for (int row = shooter.getLocation().getY(); row < 12; row++)
 		{
-			if (gameBoard.get(getSquareIndex(row, shooter.getLocation().getX())).getEntity() != Square.Entity.valueOf("Alien"))
+			int column = shooter.getLocation().getX();
+
+			if (gameBoard.get(getSquareIndex(row, column)).getEntity() != Square.Entity.valueOf("Alien"))
 			{
 				Thread shootThread = new Thread();
 				shootThread.start();
 
 				g.setColor(Color.white);
-				g.fillOval(shooter.getLocation().getY(), row, (shooter.getLocation().getY() * cellSize),
-						(shooter.getLocation().getX() * cellSize));
+				g.fillOval(column * cellSize, row * cellSize, 50, 50);
 				System.out.println("shoot");
 
 				try
@@ -178,6 +179,11 @@ public class GameBoard
 				{
 					e.printStackTrace();
 				}
+			}
+			else
+			{
+				gameBoard.get(getSquareIndex(row, column)).setEntity(Square.Entity.Empty);
+				return;
 			}
 		}
 	}
