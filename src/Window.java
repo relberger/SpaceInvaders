@@ -1,3 +1,7 @@
+package src;
+
+import src.GameBoard;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
