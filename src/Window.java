@@ -21,7 +21,7 @@ public class Window extends JFrame {
         GameBoard gameBoard = new GameBoard(SQUARE_SIZE);
         Engine engine = new Engine(gameBoard);
 
-        int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_COLUMNS;
+        int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_SIZE;
         int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_ROWS;
         engine.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
 
@@ -85,6 +85,9 @@ public class Window extends JFrame {
                     elapsedTime--;
                 }
                 sleep();
+               if(gameBoard.isGameOver()){
+                   engine.running = false;
+               }
                 repaint();
             }
         }
@@ -117,6 +120,7 @@ public class Window extends JFrame {
                 engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
+                engine.gameBoard.proj = false;
             }
 
         }
