@@ -150,7 +150,8 @@ class GameBoard {
                 (projectile.getLocation().getX()*cellSize) + cellSize/2,
                 (projectile.getLocation().getY()*cellSize) + cellSize/2);
         //g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
-        sleep();
+
+
 
     }
 
@@ -158,13 +159,14 @@ class GameBoard {
         for (int loc = BOARD_SIZE - 1; loc >= 0; loc--) {
             Square current = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), loc);
             projectile = new Projectile(current);
-            shooting = true;
             if (removeAlienIfShot()) {
+                shooting = true;
                 if (isGameOver()) {
                     exit();
                 }
                 break;
             }
+
         }
 
     }
