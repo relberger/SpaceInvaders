@@ -26,7 +26,7 @@ public class GameBoard {
 		aliens = new ArrayList<>();
 		generateGameBoard();
 		generateAliens();
-	}
+		gameBoard.get(getSquareIndex(shooter.getLocation().getY(), shooter.getLocation().getX())).setEntity(Square.Entity.Shooter);	}
 
 	private void generateGameBoard() {
 		for (int i = 0; i < BOARD_SIZE; i++) {
@@ -53,12 +53,13 @@ public class GameBoard {
 		Square newLoc;
 		boolean[] bounds = checkBounds();
 		if (movement == Direction.LEFT && !bounds[0]) {
-			newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() - 1);
+			newLoc = gameBoard.get(getSquareIndex(current.getY() - 1, current.getX()));
 			shooter.setLocation(newLoc);
 		} else if (movement == Direction.RIGHT && !bounds[1]) {
-			newLoc = new Square(Square.Entity.Shooter, current.getX(), current.getY() + 1);
+			newLoc = gameBoard.get(getSquareIndex(current.getY() + 1, current.getX()));
 			shooter.setLocation(newLoc);
 		}
+		shooter.getLocation().setEntity(Square.Entity.Shooter);
 	}
 
 
