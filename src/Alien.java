@@ -1,12 +1,10 @@
-package src;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Alien{
+public class Alien {
     //location
     private int col;
     private int row;
@@ -31,12 +29,11 @@ public class Alien{
 
     }
 
-    private void createAlienPic(){
+    private void createAlienPic() {
         File imageFile = new File("alien.jpg");
-        try{
+        try {
             alienPic = resize(ImageIO.read(imageFile), height, width);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Image not found.");
         }
 

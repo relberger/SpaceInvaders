@@ -1,10 +1,15 @@
-package src;
 
 public class Projectile {
-    private int column;
 
-	public Projectile(int column)
-	{
-		this.column = column;
-	}
+    private Square location;
+
+
+    public Projectile(Square location) {
+
+        this.location = location;
+    }
+
+    public Square getLocation() {
+        return location;
+    }
 }

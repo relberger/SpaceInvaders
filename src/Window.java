@@ -1,7 +1,3 @@
-package src;
-
-import src.GameBoard;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -25,8 +21,8 @@ public class Window extends JFrame {
         GameBoard gameBoard = new GameBoard(SQUARE_SIZE);
         Engine engine = new Engine(gameBoard);
 
-        int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_COLUMNS;
-        int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_ROWS;
+        int canvasWidth = SQUARE_SIZE * gameBoard.BOARD_SIZE;
+        int canvasHeight = SQUARE_SIZE * gameBoard.BOARD_SIZE;
         engine.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
 
         addKeyListener(new MyKeyAdapter());
@@ -43,6 +39,7 @@ public class Window extends JFrame {
         pack();
         setVisible(true);
         setLocationRelativeTo(null);// Center window
+
     }
 
     private void startGame(Engine engine) {
@@ -121,7 +118,6 @@ public class Window extends JFrame {
                 engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
-                repaint();
             }
 
         }
