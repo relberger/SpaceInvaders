@@ -7,7 +7,6 @@ class Shooter
 {
 	private boolean exists;
 	private Image shooterIcon;
-	private Projectile projectile;
 	private Square location;
 
 	public Shooter(int x, int y, boolean exists)
@@ -49,11 +48,6 @@ class Shooter
 	public void setShooterIcon(Image shooterIcon)
 	{
 		this.shooterIcon = shooterIcon;
-	}
-
-	public Projectile getProjectile()
-	{
-		return projectile;
 	}
 
 

@@ -80,19 +80,23 @@ public class GameBoard {
     }
 
 
-    private void removeAlienIfShot() {
-        for (int i = 0; i < gameBoard.size(); i++) {
-            Square alien = gameBoard.get(i);
+    private boolean removeAlienIfShot() {
+        boolean dead = false;
+        for (int i = 0; i < aliens.size(); i++) {
+            int squareLoc = getSquareIndex(aliens.get(i).getRow(), aliens.get(i).getCol());
+            Square alien = gameBoard.get(squareLoc);
             if (projectile.getLocation().equals(alien)) {
                 alien.setEntity(Square.Entity.Empty);
                 Alien deadAlien = aliens.get(i);
+                aliens.remove(i);
                 deadAlien.setAlive(false);
+                dead = true;
                 score += 10;
                 break;
 
             }
         }
-
+        return dead;
     }
 
 
@@ -108,7 +112,6 @@ public class GameBoard {
     private void paintShooter(Graphics2D g) {
         int col = shooter.getLocation().getY();
         int row = shooter.getLocation().getX();
-        gameBoard.get(getSquareIndex(col, row));
         g.drawImage(shooter.getShooterIcon(), col * cellSize, row * cellSize, imgObs);
 
     }
@@ -135,16 +138,31 @@ public class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-
+        g.fillRect(projectile.getLocation().getY(), projectile.getLocation().getX(), cellSize/2, cellSize);
+        sleep();
     }
 
     public void shoot() {
-        projectile = new Projectile(shooter.getLocation().getX());
-        paintShot(g);
-        removeAlienIfShot();
+        for (int loc = 0; loc < BOARD_ROWS; loc++) {
+            Square current = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), loc);
+            projectile = new Projectile(current);
+            paintShot(g);
+            if (removeAlienIfShot()) {
+                break;
+            }
+        }
     }
 
     public boolean isGameOver() {
-        return gameOver;
+
+        return aliens.isEmpty();
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
     }
 }
