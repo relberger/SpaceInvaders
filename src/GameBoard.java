@@ -11,15 +11,14 @@ public class GameBoard {
     private ArrayList<Square> gameBoard;
     private ArrayList<Alien> aliens;
     private ImageObserver imgObs;
-    public final int BOARD_COLUMNS = 15;
-    public final int BOARD_ROWS = 12;
+    public final int BOARD_SIZE = 15;
     public Direction movement;
-    private boolean gameOver;
+    public boolean proj;
     Graphics2D g;
 
     GameBoard(int cellSize) {
         this.cellSize = cellSize;
-        this.shooter = new Shooter(BOARD_ROWS - 1, (BOARD_COLUMNS - 1) / 2, true);
+        this.shooter = new Shooter(BOARD_SIZE - 1, (BOARD_SIZE - 1) / 2, true);
 
         gameBoard = new ArrayList<>();
         aliens = new ArrayList<>();
@@ -28,8 +27,8 @@ public class GameBoard {
     }
 
     private void generateGameBoard() {
-        for (int i = 0; i < BOARD_ROWS; i++) {
-            for (int j = 0; j < BOARD_COLUMNS; j++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 Square square = new Square(i, j);
                 gameBoard.add(square);
             }
@@ -37,7 +36,7 @@ public class GameBoard {
     }
 
     private void generateAliens() {
-        for (int i = 0; i < (5 * BOARD_COLUMNS); i++) {
+        for (int i = 0; i < (5 * BOARD_SIZE); i++) {
             Square square = gameBoard.get(i);
             square.setEntity(Square.Entity.Alien);
             Alien alien = new Alien(square.getX(), square.getY(), cellSize, cellSize);
@@ -64,7 +63,7 @@ public class GameBoard {
     private boolean[] checkBounds() {
         Square sq = shooter.getLocation();
         boolean tooFarLeft = sq.getY() == 0;
-        boolean tooFarRight = sq.getY() == BOARD_COLUMNS - 1;
+        boolean tooFarRight = sq.getY() == BOARD_SIZE - 1;
         boolean[] bounds = {tooFarLeft, tooFarRight};
         return bounds;
     }
@@ -82,9 +81,9 @@ public class GameBoard {
 
     private boolean removeAlienIfShot() {
         boolean dead = false;
-        for (int i = 0; i < aliens.size(); i++) {
+        for (int i = aliens.size() - 1; i >=0; i--) {
             int squareLoc = getSquareIndex(aliens.get(i).getRow(), aliens.get(i).getCol());
-            if(squareLoc != -1) {
+            if (squareLoc != -1) {
                 Square alien = gameBoard.get(squareLoc);
                 if (projectile.getLocation().equals(alien)) {
                     alien.setEntity(Square.Entity.Empty);
@@ -109,6 +108,10 @@ public class GameBoard {
 
         paintShooter(g);
         paintAliens(g);
+        if (proj) {
+            paintShot(g);
+        }
+
     }
 
     private void paintShooter(Graphics2D g) {
@@ -140,19 +143,22 @@ public class GameBoard {
     }
 
     private void paintShot(Graphics2D g) {
-        g.fillRect(projectile.getLocation().getY(), projectile.getLocation().getX(), cellSize/2, cellSize);
+        g.setColor(Color.CYAN);
+        g.fillRect(projectile.getLocation().getY(), projectile.getLocation().getX(), cellSize / 5, cellSize);
         sleep();
+
     }
 
     public void shoot() {
-        for (int loc = 0; loc < BOARD_ROWS; loc++) {
+        for (int loc = BOARD_SIZE - 1; loc >= 0; loc--) {
             Square current = new Square(Square.Entity.Projectile, shooter.getLocation().getY(), loc);
             projectile = new Projectile(current);
-            paintShot(g);
+            proj = true;
             if (removeAlienIfShot()) {
                 break;
             }
         }
+
     }
 
     public boolean isGameOver() {
