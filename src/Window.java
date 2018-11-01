@@ -121,9 +121,7 @@ public class Window extends JFrame {
                 engine.gameBoard.moveShooter();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
                 engine.gameBoard.shoot();
-                repaint();
-            }
-
+           }
         }
     }
 

@@ -96,19 +96,13 @@ public class GameBoard
 	}
 
 
-/*    private void removeAlienIfShot() {
-        for (int i = 0; i < gameBoard.size(); i++) {
-            Square alien = gameBoard.get(i);
-            if (projectile.getLocation().equals(alien)) {
-                alien.setEntity(Square.Entity.Empty);
-                Alien deadAlien = aliens.get(i);
-                deadAlien.setAlive(false);
-                score += 10;
-                break;
-
-            }
-        }
-    }*/
+    private void removeAlienIfShot(int row, int col) {
+		Square alien = gameBoard.get(getSquareIndex(row, col));
+		alien.setEntity(Square.Entity.Empty);
+		Alien deadAlien = aliens.get(getAlienIndex(row, col));
+		deadAlien.setAlive(false);
+		score += 10;
+    }
 
 
 	void paint(Graphics graphics)
@@ -144,6 +138,21 @@ public class GameBoard
 		return -1;
 	}
 
+	public int getAlienIndex(int row, int col)
+	{
+		for (int i = 0; i < aliens.size(); i++)
+		{
+			if (aliens.get(i).getRow() == row)
+			{
+				if (aliens.get(i).getCol() == col)
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+
 	private void paintAliens(Graphics2D g)
 	{
 
@@ -165,19 +174,15 @@ public class GameBoard
 			Square square = gameBoard.get(getSquareIndex(row, column));
 
 			if (square.getEntity() != Square.Entity.valueOf("Alien"))
-			{
-				Thread shootThread = new Thread();
-				shootThread.start();
-
-				square.setEntity(Square.Entity.Projectile);
+			{square.setEntity(Square.Entity.Projectile);
 
 				g.setColor(Color.white);
-				g.fillOval(square.getX(), square.getY(), 50, 50);
-				System.out.println("shoot");
+				g.fillOval(square.getX(), square.getY(), 20, 40);
+				System.out.println("shoot" + square.getX() + square.getY() + square.getEntity());
 
 				try
 				{
-					shootThread.sleep(500);
+					Thread.sleep(200);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
@@ -185,10 +190,8 @@ public class GameBoard
 			}
 			else
 			{
+				removeAlienIfShot(square.getX(), square.getY());
 				square.setEntity(Square.Entity.Empty);
-				//need to somehow remove/overwrite alien image 
-				//g.setColor(Color.black);
-				//g.drawRect(square.getX(), square.getY(), square.getX() * cellSize, square.getY() * cellSize);
 				return;
 			}
 		}
