@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+.idea
+target/
+out/
+=======
 .idea/
 out/
 SpaceInvaders.iml
@@ -5,3 +10,4 @@ SpaceInvaders.iml
 target/
 vcs.xml
 workspace.xml
+>>>>>>> cdruk-master

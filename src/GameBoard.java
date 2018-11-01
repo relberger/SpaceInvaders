@@ -1,6 +1,8 @@
+
 package src;
 
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -176,10 +178,10 @@ class GameBoard {
 
     private void paintShot(Graphics2D g) {
         g.setColor(Color.GREEN);
-        g.drawLine((shooter.getLocation().getY()*cellSize) + cellSize/2,
-                (shooter.getLocation().getX()*cellSize)  + cellSize/2,
-                (projectile.getLocation().getX()*cellSize) + cellSize/2,
-                (projectile.getLocation().getY()*cellSize) + cellSize/2);
+        g.drawLine((shooter.getLocation().getY() * cellSize) + cellSize / 2,
+                (shooter.getLocation().getX() * cellSize) + cellSize / 2,
+                (projectile.getLocation().getX() * cellSize) + cellSize / 2,
+                (projectile.getLocation().getY() * cellSize) + cellSize / 2);
         sleep();
 
     }
