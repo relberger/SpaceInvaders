@@ -1,5 +1,3 @@
-package src;
-
 public class Projectile {
 
     private Square location;

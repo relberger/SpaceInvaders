@@ -1,5 +1,3 @@
-package src;
-
 import java.awt.*;
 import java.util.*;
 import java.awt.image.ImageObserver;
@@ -112,7 +110,6 @@ class GameBoard {
         paintShooter(g);
         paintAliens(g);
         if (shooting) {
-            System.out.println(projectile.getLocation());
             paintShot(g);
         }
 
@@ -148,9 +145,6 @@ class GameBoard {
 
     private void paintShot(Graphics2D g) {
         g.setColor(Color.GREEN);
-<<<<<<< HEAD
-        g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
-=======
         g.drawLine((shooter.getLocation().getY()*cellSize) + cellSize/2,
                 (shooter.getLocation().getX()*cellSize)  + cellSize/2,
                 (projectile.getLocation().getX()*cellSize) + cellSize/2,
@@ -158,7 +152,6 @@ class GameBoard {
         //g.fillRect(projectile.getLocation().getX() * cellSize, projectile.getLocation().getY() * cellSize, cellSize / 5, cellSize);
         sleep();
 
->>>>>>> 79f0486c2c4be57f6617c3e49993ae88cfcdfda1
     }
 
     public void shoot() {
@@ -167,7 +160,6 @@ class GameBoard {
             projectile = new Projectile(current);
             shooting = true;
             if (removeAlienIfShot()) {
-                shooting = false;
                 if (isGameOver()) {
                     exit();
                 }
